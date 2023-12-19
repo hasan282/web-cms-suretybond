@@ -11,6 +11,9 @@ public/fonts/*
 public/plugins/*
 !public/plugins/index.html
 
+public/plugins_and_fonts.rar
+vendor_ci.rar
+
 #-------------------------
 # Operating Specific Junk Files
 #-------------------------
