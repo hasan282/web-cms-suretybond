@@ -59,7 +59,7 @@ $bread = $bread ?? $title;
 
         <footer class="main-footer text-sm">
             <div class="text-center">
-                <strong>&copy; <?= date('Y'); ?> <a href="#" target="_blank">App282</a></strong>
+                <strong>&copy; <?= date('Y'); ?> <a href="https://ptjis.id/" target="_blank">Jasmine Indah Servistama</a></strong>
                 All rights reserved
             </div>
         </footer>

@@ -27,11 +27,11 @@ $navMenu = array(
 
     <ul class="navbar-nav ml-auto">
 
-        <li class="nav-item d-flex">
-            <div class="custom-control custom-switch my-auto mr-3">
-                <input <?= $darkmode ? 'checked ' : ''; ?>type="checkbox" class="custom-control-input cursor-pointer" id="darkswitch">
-                <label class="custom-control-label text-secondary cursor-pointer" for="darkswitch">
-                    <i class="fas fa-moon"></i>
+        <li class="nav-item d-flex px-3">
+            <div class="theme-switch-wrapper my-auto">
+                <label class="theme-switch" for="darkswitch">
+                    <input <?= $darkmode ? 'checked ' : ''; ?>type="checkbox" id="darkswitch">
+                    <div class="switch-slider switch-round"></div>
                 </label>
             </div>
         </li>

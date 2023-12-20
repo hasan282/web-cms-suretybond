@@ -1,4 +1,4 @@
-<?= $this->extend('template/basic'); ?>
+<?= $this->extend('layout/basic'); ?>
 
 <?= $this->section('body'); ?>
 

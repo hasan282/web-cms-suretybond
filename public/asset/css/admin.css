@@ -11,6 +11,14 @@
   opacity: 1;
 }
 
+.dark-mode .brand-link:hover > span {
+  color: #fff;
+}
+
+.dark-mode footer a {
+  color: #45b1f9;
+}
+
 .dark-mode .list-group .list-group-item.active {
   background-color: #3f6791;
 }
@@ -175,4 +183,59 @@ table th.fit {
   to {
     background-position-x: -200%;
   }
+}
+
+.theme-switch-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.theme-switch {
+  display: inline-block;
+  height: 25px;
+  position: relative;
+  width: 42px;
+  margin-bottom: 0;
+}
+
+.theme-switch input {
+  display: none;
+}
+
+.switch-slider {
+  background-color: #ccc;
+  bottom: 0;
+  cursor: pointer;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: 0.3s;
+}
+
+.switch-slider:before {
+  background-color: #fff;
+  bottom: 4px;
+  content: "";
+  height: 17px;
+  left: 4px;
+  position: absolute;
+  transition: 0.3s;
+  width: 17px;
+}
+
+input:checked + .switch-slider {
+  background-color: #3498db;
+}
+
+input:checked + .switch-slider:before {
+  transform: translateX(17px);
+}
+
+.switch-slider.switch-round {
+  border-radius: 25px;
+}
+
+.switch-slider.switch-round:before {
+  border-radius: 50%;
 }

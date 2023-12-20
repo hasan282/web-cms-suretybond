@@ -4,7 +4,7 @@ $userName  = userdata('nama')    ?? 'User Name';
 $userImage = userdata('foto')    ?? 'https://avatars.githubusercontent.com/u/47323055';
 $userRole  = userdata('role_id') ?? '101';
 
-$brandImage = '/image/icon/icon-64.png';
+$brandImage = '/image/icon/j-icon-64.png';
 
 $navigations = \App\Models\Core\SideMenu::get($userRole);
 
@@ -12,7 +12,7 @@ $navigations = \App\Models\Core\SideMenu::get($userRole);
 <aside class="main-sidebar sidebar-dark-info elevation-4">
     <a href="/" class="brand-link link-transparent">
         <img src="<?= $brandImage; ?>" alt="" class="brand-image">
-        <span class="brand-text font-weight-lighter">AdminCI <strong>Apps</strong></span>
+        <span class="brand-text font-weight-lighter">Jasmin-e <strong>Apps</strong></span>
     </a>
     <div class="sidebar">
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">

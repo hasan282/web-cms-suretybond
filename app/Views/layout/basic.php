@@ -1,6 +1,6 @@
 <?php
 
-$application_title = 'My Application';
+$application_title = 'Jasmin-e';
 
 ?>
 <!DOCTYPE html>
@@ -14,10 +14,10 @@ $application_title = 'My Application';
 
     <title><?= $application_title; ?><?= (isset($title)) ? ' · ' . $title : ''; ?></title>
 
-    <link rel="shortcut icon" href="/image/icon/icon-64.png" type="image/png">
-    <link rel="icon" href="/image/icon/icon-32.png" sizes="32x32" type="image/png">
-    <link rel="icon" href="/image/icon/icon-64.png" sizes="64x64" type="image/png">
-    <link rel="apple-touch-icon" href="/image/icon/icon-128.png">
+    <link rel="shortcut icon" href="/image/icon/j-icon-128.png" type="image/png">
+    <link rel="icon" href="/image/icon/j-icon-32.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="/image/icon/j-icon-64.png" sizes="64x64" type="image/png">
+    <link rel="apple-touch-icon" href="/image/icon/j-icon-128.png">
 
     <style>
         .bg-pattern {
