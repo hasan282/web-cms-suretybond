@@ -11,7 +11,14 @@
   opacity: 1;
 }
 
+/* ----------------------------------------------------------------------- */
+/* ------------------------------ Dark Mode ------------------------------ */
+
 .dark-mode .brand-link:hover > span {
+  color: #fff;
+}
+
+.dark-mode .sidebar .info > a:hover {
   color: #fff;
 }
 
@@ -85,6 +92,15 @@
   background-color: #343a40;
   color: #b0b0b0;
 }
+
+.dark-mode .login-card-body p {
+  color: #a9a9a9;
+  > a {
+    color: #45b1f9;
+  }
+}
+
+/* ----------------------------------------------------------------------- */
 
 .mw-1 {
   max-width: 100px;
