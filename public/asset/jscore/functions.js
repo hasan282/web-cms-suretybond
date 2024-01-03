@@ -77,4 +77,19 @@ $(function () {
         .children("label")
         .removeClass("text-" + COLOR);
   });
+
+  $(".showpass")
+    .addClass("cursor-pointer")
+    .html('<span class="fas fa-fw fa-eye"></span>')
+    .data("show", "0")
+    .on("click", function () {
+      const ICON = "fas fa-fw fa-eye";
+      const SHOW = parseInt($(this).data("show")) === 1;
+      const TARGET = $("#" + $(this).data("target"));
+      TARGET.attr("type", SHOW ? "password" : "text");
+      $(this)
+        .children("span")
+        .attr("class", SHOW ? ICON : ICON + "-slash");
+      $(this).data("show", SHOW ? "0" : "1");
+    });
 });

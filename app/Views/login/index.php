@@ -7,15 +7,13 @@
 
         <form method="POST">
 
+            <input type="text" name="inputuser" id="inputuser" placeholder="Username or Email" class="form-control mb-3">
+
             <div class="input-group">
-
-                <input type="password" name="in_pass" id="in_pass" class="form-control" placeholder="Password">
+                <input type="password" name="inputpass" id="inputpass" class="form-control" placeholder="Password">
                 <div class="input-group-append">
-                    <div class="input-group-text cursor-pointer showpass" data-target="in_pass" data-show="0">
-                        <span class="fas fa-fw fa-eye"></span>
-                    </div>
+                    <div class="input-group-text showpass" data-target="inputpass"></div>
                 </div>
-
             </div>
 
             <div class="text-center mt-4">

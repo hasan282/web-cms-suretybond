@@ -6,7 +6,11 @@ class Login extends BaseController
 {
     public function index(): string
     {
-        $data['title'] = 'Login ke Aplikasi';
+        $data['title'] = 'Login';
         return $this->view('login/index', $data);
+    }
+
+    public function process()
+    {
     }
 }

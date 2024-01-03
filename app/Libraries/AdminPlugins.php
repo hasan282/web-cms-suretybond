@@ -9,6 +9,7 @@ class AdminPlugins extends Plugin
     protected function plugins()
     {
         $refresh = env_is('production') ? '' : '?plug=in' . mt_rand(1000, 9999);
+        $minify  = env_is('production') ? '.min.js' : '.js';
 
         $this->plugin('basic', array(
             ['https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback', 'css', 'head'],
@@ -17,7 +18,7 @@ class AdminPlugins extends Plugin
             ['/adminlte/plugins/jquery/jquery.min.js',                 'js',  'foot'],
             ['/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js', 'js',  'foot'],
             ['/adminlte/asset/js/adminlte.min.js',                     'js',  'foot'],
-            ['/asset/jscore/functions.js' . $refresh,                  'js',  'foot']
+            ['/asset/jscore/functions' . $minify . $refresh,           'js',  'foot']
         ));
 
         $this->plugin('fontawesome', array(
@@ -57,7 +58,8 @@ class AdminPlugins extends Plugin
             ['/adminlte/plugins/moment/moment.min.js',                                            'js',  'foot'],
             ['/adminlte/plugins/inputmask/jquery.inputmask.min.js',                               'js',  'foot'],
             ['/adminlte/plugins/daterangepicker/daterangepicker.js',                              'js',  'foot'],
-            ['/adminlte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js',   'js',  'foot']
+            ['/adminlte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js',   'js',  'foot'],
+            ['/asset/jscore/input.date' . $minify,                                                'js',  'foot']
         ));
 
         $this->plugin('jspdf', array(
