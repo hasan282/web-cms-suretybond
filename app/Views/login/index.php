@@ -2,23 +2,41 @@
 
 <?= $this->section('login_box'); ?>
 
+<div class="mx-auto mb-3" style="max-width:100px">
+    <a href="/" class="link-transparent">
+        <img class="img-fluid" src="/image/icon/icon-128.png">
+    </a>
+</div>
+
 <div class="card">
     <div class="card-body login-card-body">
+        <form method="post">
 
-        <form method="POST">
+            <input type="hidden" name="urrequest" value="">
+            <?= csrf_field(); ?>
 
-            <input type="text" name="inputuser" id="inputuser" placeholder="Username or Email" class="form-control mb-3">
+            <div>
+                <small class="text-secondary ml-2" id="inputuser_label"></small>
+            </div>
+            <input type="text" name="inputuser" id="inputuser" placeholder="Username or Email" class="form-control login-input is-invalid">
 
+            <div>
+                <small class="text-secondary ml-2" id="inputpass_label"></small>
+            </div>
             <div class="input-group">
-                <input type="password" name="inputpass" id="inputpass" class="form-control" placeholder="Password">
+                <input type="password" name="inputpass" id="inputpass" class="form-control login-input is-invalid" placeholder="Password">
                 <div class="input-group-append">
                     <div class="input-group-text showpass" data-target="inputpass"></div>
                 </div>
             </div>
 
-            <div class="text-center mt-4">
+            <div style="height:27px" class="text-center text-danger mt-2">
+                <small id="failmessage" data-input="inputpass">Your Password is Wrong</small>
+            </div>
 
-                <button type="submit" class="btn btn-primary btn-block text-bold" disabled>
+            <div class="text-center mt-2">
+
+                <button type="submit" id="loginbutton" class="btn btn-primary btn-block text-bold" disabled>
                     <i class="fas fa-sign-in-alt mr-2"></i>Login
                 </button>
 
@@ -37,4 +55,22 @@
     </div>
 </div>
 
+<?= $this->endSection(); ?>
+
+<?= $this->section('script'); ?>
+<script>
+    $(function() {
+        setInterval(() => {
+            window.location.reload()
+        }, 3e5);
+        let t = () => "" == $("#inputuser").val() || "" == $("#inputpass").val();
+        $("input.login-input").on("input", function() {
+            let i = $(this).attr("id"),
+                a = $(this).attr("placeholder");
+            $(this).removeClass("is-invalid"), $("#failmessage").data("input") == i && $("#failmessage").data("input", "0").html(""), $("#" + i + "_label").html("" == $("#" + i).val() ? "" : a), $("#loginbutton").prop("disabled", t())
+        }), $('form[method="post"]').on("submit", function(i) {
+            t() && i.preventDefault()
+        })
+    });
+</script>
 <?= $this->endSection(); ?>

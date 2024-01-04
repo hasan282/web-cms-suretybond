@@ -12,5 +12,20 @@ class Login extends BaseController
 
     public function process()
     {
+        $userOrEmail = $this->request->getPost('inputuser');
+        $password    = $this->request->getPost('inputpass');
+        $requestUri  = $this->request->getPost('urrequest');
+
+        $result = 0;
+
+        // var_dump($userOrEmail);
+        // var_dump($password);
+        // var_dump($requestUri);
+
+        // $this->session->getFlashdata('');
+
+        // $this->session->setFlashdata('');
+
+        return redirect()->to('');
     }
 }
