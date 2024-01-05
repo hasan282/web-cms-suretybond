@@ -20,7 +20,7 @@ $navigations = \App\Models\Core\SideMenu::get($userRole);
                 <img src="<?= $userImage; ?>" class="img-circle elevation-1" alt="">
             </div>
             <div class="info">
-                <a href="/#user" class="d-block"><?= $userName; ?></a>
+                <a href="/user" class="d-block"><?= $userName; ?></a>
             </div>
         </div>
         <nav class="mt-2 pb-5">
@@ -34,7 +34,8 @@ $navigations = \App\Models\Core\SideMenu::get($userRole);
                 <li class="nav-header">MENU</li>
                 <?php foreach ($navigations as $navs) : ?>
                     <li class="nav-item<?= $navs['active'] && !empty($navs['subs']) ? ' menu-open' : ''; ?>">
-                        <a href="/<?= $navs['url']; ?>" class="nav-link<?= $navs['active'] ? ' active' : ''; ?>">
+                        <?php $slash1 = (substr($navs['url'], 0, 1) == '#') ? '' : '/'; ?>
+                        <a href="<?= $slash1 . $navs['url']; ?>" class="nav-link<?= $navs['active'] ? ' active' : ''; ?>">
                             <i class="nav-icon <?= $navs['icon']; ?>"></i>
                             <p>
                                 <?= $navs['text']; ?>
@@ -47,7 +48,8 @@ $navigations = \App\Models\Core\SideMenu::get($userRole);
                             <ul class="nav nav-treeview">
                                 <?php foreach ($navs['subs'] as $subs) : ?>
                                     <li class="nav-item">
-                                        <a href="/<?= $subs['url']; ?>" class="nav-link<?= $subs['active'] ? ' active' : ''; ?>">
+                                        <?php $slash2 = (substr($subs['url'], 0, 1) == '#') ? '' : '/'; ?>
+                                        <a href="<?= $slash2 . $subs['url']; ?>" class="nav-link<?= $subs['active'] ? ' active' : ''; ?>">
                                             <i class="nav-icon <?= $subs['icon']; ?>"></i>
                                             <p><?= $subs['text']; ?></p>
                                         </a>
@@ -59,7 +61,7 @@ $navigations = \App\Models\Core\SideMenu::get($userRole);
                 <?php endforeach; ?>
                 <li class="nav-header">USER</li>
                 <li class="nav-item">
-                    <a href="/#setting" class="nav-link <?= url_is('setting*') ? ' active' : ''; ?>">
+                    <a href="#setting" class="nav-link <?= url_is('setting*') ? ' active' : ''; ?>">
                         <i class="nav-icon fas fa-cog"></i>
                         <p>Pengaturan Akun</p>
                     </a>

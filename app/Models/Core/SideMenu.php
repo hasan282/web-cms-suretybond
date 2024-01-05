@@ -16,11 +16,10 @@ class SideMenu
 
     private function setdata(int $role)
     {
-        // dummy data menu
-        $this->menu = \App\Models\Dummy\Menu::get();
-
-        // remove dummy data if you have real data
-        // $this->menu = RealDataMenu;
+        $model = new \App\Models\MenuModel;
+        $this->menu = $model->select([
+            'text', 'icon', 'url', 'group', 'group_text', 'group_icon'
+        ])->order('c_menu.id ASC')->data();
     }
 
     private function compile(): array

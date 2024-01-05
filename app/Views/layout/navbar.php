@@ -5,7 +5,7 @@ $userImage   = userdata('foto')   ?? 'https://avatars.githubusercontent.com/u/47
 $userSubInfo = userdata('office') ?? 'PT ABC Indonesia';
 
 $navMenu = array(
-    ['menu' => 'Dashboard', 'url' => '#dashboard', 'icon' => 'fas fa-tachometer-alt'],
+    ['menu' => 'Dashboard', 'url' => '/dashboard', 'icon' => 'fas fa-tachometer-alt'],
     ['menu' => 'Pencarian', 'url' => '#search', 'icon' => 'fas fa-search']
 );
 
@@ -18,7 +18,7 @@ $navMenu = array(
         </li>
         <?php foreach ($navMenu as $nm) : ?>
             <li class="nav-item d-none d-sm-inline-block">
-                <a href="/<?= $nm['url']; ?>" class="nav-link<?= url_is($nm['url'] . '*') ? ' active' : ''; ?>">
+                <a href="<?= $nm['url']; ?>" class="nav-link<?= url_is($nm['url'] . '*') ? ' active' : ''; ?>">
                     <i class="<?= $nm['icon']; ?> mr-2"></i><?= $nm['menu']; ?>
                 </a>
             </li>
@@ -48,10 +48,10 @@ $navMenu = array(
                     <small><?= $userSubInfo; ?></small>
                 </li>
                 <li class="user-footer">
-                    <a href="/#setting" class="btn btn-default btn-flat">
+                    <a href="#setting" class="btn btn-default btn-flat">
                         <i class="fas fa-cog mr-1"></i>Pengaturan
                     </a>
-                    <a href="/#logout" class="btn btn-default btn-flat float-right">
+                    <a href="#logout" class="btn btn-default btn-flat float-right">
                         <i class="fas fa-sign-out-alt mr-1"></i>Keluar
                     </a>
                 </li>

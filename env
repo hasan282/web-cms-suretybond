@@ -1,0 +1,11 @@
+# ------- env ---------------------------
+CI_ENVIRONMENT = development
+
+app.baseURL = 'http://localhost:8080/'
+
+database.default.hostname = localhost
+database.default.database = jasmin_sbond
+database.default.username = root
+database.default.password = 
+database.default.DBDriver = MySQLi
+# ---------------------------------------
