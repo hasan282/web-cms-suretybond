@@ -19,7 +19,7 @@ class Menu extends Seeder
 
         $menu = array(
 
-            [101, 'Certificate List',   'fas fa-list-ul',     'certificate',     100],
+            [101, 'Certificate List',   'fas fa-list-ul',     'certificate',      100],
             [102, 'Add New',            'fas fa-plus-circle', '#add-certificate', 100],
             [201, 'Principal List',     'fas fa-list-ul',     '#principal',       200],
             [202, 'Add New',            'fas fa-plus-circle', '#add-principal',   200],
