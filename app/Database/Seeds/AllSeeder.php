@@ -14,5 +14,6 @@ class AllSeeder extends Seeder
         $this->call('MenuAccess');
 
         $this->call('Agent');
+        $this->call('User');
     }
 }
