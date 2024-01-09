@@ -61,7 +61,7 @@ $navigations = \App\Models\Core\SideMenu::get($userRole);
                 <?php endforeach; ?>
                 <li class="nav-header">USER</li>
                 <li class="nav-item">
-                    <a href="#setting" class="nav-link <?= url_is('setting*') ? ' active' : ''; ?>">
+                    <a href="setting" class="nav-link <?= url_is('setting*') ? ' active' : ''; ?>">
                         <i class="nav-icon fas fa-cog"></i>
                         <p>Pengaturan Akun</p>
                     </a>

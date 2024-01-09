@@ -71,6 +71,12 @@ if (!function_exists('remove_userdata')) {
     }
 }
 
+if (!function_exists('update_userdata')) {
+    function update_userdata()
+    {
+    }
+}
+
 if (!function_exists('is_login')) {
     /**
      * check login status

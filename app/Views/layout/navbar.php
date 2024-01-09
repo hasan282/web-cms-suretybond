@@ -39,7 +39,6 @@ $navMenu = array(
         <li class="nav-item dropdown user-menu">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                 <img src="<?= $userImage; ?>" class="user-image img-circle elevation-1" alt="">
-                <span class="d-none d-md-inline"><?= $userName; ?></span>
             </a>
             <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <li class="user-header">

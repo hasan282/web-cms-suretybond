@@ -2,6 +2,8 @@
 
 namespace App\Controllers;
 
+use App\Controllers\BaseController;
+
 class Certificate extends BaseController
 {
     public function index(): string
@@ -10,6 +12,14 @@ class Certificate extends BaseController
 
         $this->plugin->set('scrollbar');
         return $this->view('certificate/index', $data);
+    }
+
+    public function add(): string
+    {
+        $data['title'] = 'Add New Certificate';
+
+        $this->plugin->set('scrollbar');
+        return $this->view('layout/blank', $data);
     }
 
     private function email()

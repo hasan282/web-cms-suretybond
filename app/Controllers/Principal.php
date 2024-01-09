@@ -4,19 +4,19 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 
-class User extends BaseController
+class Principal extends BaseController
 {
     public function index(): string
     {
-        $data['title'] = 'User Profile';
+        $data['title'] = 'List of Principal';
 
         $this->plugin->set('scrollbar');
         return $this->view('layout/blank', $data);
     }
 
-    public function manage(): string
+    public function add(): string
     {
-        $data['title'] = 'Manage User Account';
+        $data['title'] = 'Add New Principal';
 
         $this->plugin->set('scrollbar');
         return $this->view('layout/blank', $data);
