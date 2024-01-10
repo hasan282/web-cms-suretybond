@@ -84,7 +84,7 @@ if (!function_exists('is_login')) {
     function is_login(): bool
     {
         $check_keys = array(
-            'id', 'user', 'nama', 'foto', 'office', 'role'
+            'id', 'user', 'nama', 'foto', 'agent', 'agent_id', 'access'
         );
 
         $session = \Config\Services::session();

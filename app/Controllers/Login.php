@@ -6,8 +6,11 @@ use App\Controllers\BaseController;
 
 class Login extends BaseController
 {
-    public function index(): string
+    public function index()
     {
+        if (is_login())
+            return redirect()->to('dashboard');
+
         $data['title'] = 'Login';
         return $this->view('login/index', $data);
     }
@@ -18,16 +21,28 @@ class Login extends BaseController
         $password    = $this->request->getPost('inputpass');
         $requestUri  = $this->request->getPost('urrequest');
 
-        $result = 0;
+        $model = new \App\Models\UserModel;
+        $login = $model->login($userOrEmail, $password);
 
-        // var_dump($userOrEmail);
-        // var_dump($password);
-        // var_dump($requestUri);
+        if ($login['status']) {
+            $userdata = array(
+                'id'       => $login['data']['id'],
+                'user'     => $login['data']['user'],
+                'nama'     => $login['data']['nama'],
+                'foto'     => $login['data']['image'],
+                'agent'    => $login['data']['agent'],
+                'agent_id' => $login['data']['agent_id'],
+                'access'   => $login['data']['access_id']
+            );
+            set_userdata($userdata);
+        } else {
+        }
+        return redirect()->to('');
+    }
 
-        // $this->session->getFlashdata('');
-
-        // $this->session->setFlashdata('');
-
+    public function out()
+    {
+        remove_userdata();
         return redirect()->to('');
     }
 }

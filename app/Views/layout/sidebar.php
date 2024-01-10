@@ -1,8 +1,8 @@
 <?php
 
-$userName  = userdata('nama')    ?? 'User Name';
-$userImage = userdata('foto')    ?? 'https://avatars.githubusercontent.com/u/47323055';
-$userRole  = userdata('role_id') ?? '301';
+$userName  = userdata('nama')   ?? 'User Name';
+$userImage = userdata('foto')   ?? 'default/USER000M.jpg';
+$userRole  = userdata('access') ?? '301';
 
 $brandImage = '/image/icon/icon-64.png';
 
@@ -17,7 +17,7 @@ $navigations = \App\Models\Core\SideMenu::get($userRole);
     <div class="sidebar">
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="<?= $userImage; ?>" class="img-circle elevation-1" alt="">
+                <img src="/image/<?= $userImage; ?>" class="img-circle elevation-1" alt="">
             </div>
             <div class="info">
                 <a href="/user" class="d-block"><?= $userName; ?></a>
@@ -61,7 +61,7 @@ $navigations = \App\Models\Core\SideMenu::get($userRole);
                 <?php endforeach; ?>
                 <li class="nav-header">USER</li>
                 <li class="nav-item">
-                    <a href="setting" class="nav-link <?= url_is('setting*') ? ' active' : ''; ?>">
+                    <a href="/setting" class="nav-link <?= url_is('setting*') ? ' active' : ''; ?>">
                         <i class="nav-icon fas fa-cog"></i>
                         <p>Pengaturan Akun</p>
                     </a>
