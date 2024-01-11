@@ -8,6 +8,7 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/dashboard', 'Dashboard::index');
 
 $routes->get('/user', 'User::index');
+$routes->get('/user/switch', 'Login::switch');
 
 $routes->get('/certificate', 'Certificate::index');
 $routes->get('/add/certificate', 'Certificate::add');

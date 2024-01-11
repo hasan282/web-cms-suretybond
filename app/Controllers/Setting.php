@@ -6,8 +6,10 @@ use App\Controllers\BaseController;
 
 class Setting extends BaseController
 {
-    public function index(): string
+    public function index()
     {
+        if (!is_login()) return $this->login();
+
         $data['title'] = 'Setting';
 
         $this->plugin->set('scrollbar');

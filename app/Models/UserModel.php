@@ -37,6 +37,7 @@ class UserModel extends BaseModel
     public function where($where)
     {
         $this->alias('where', [
+            'hash'  => 'd_user.hash',
             'user'  => 'd_user.username',
             'email' => 'd_user.email'
         ]);
