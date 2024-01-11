@@ -10,9 +10,26 @@ class Setting extends BaseController
     {
         if (!is_login()) return $this->login();
 
-        $data['title'] = 'Setting';
+        $model = new \App\Models\UserModel;
+        $data['title']    = 'Account Settings';
+        $data['userdata'] = $model->select([
+            'email', 'valid'
+        ])->where([
+            'id' => userdata('id')
+        ])->data(false);
 
         $this->plugin->set('scrollbar');
-        return $this->view('layout/blank', $data);
+        return $this->view('setting/index', $data);
+    }
+
+    public function verify()
+    {
+        if (!is_login()) return $this->login();
+
+        $data['title'] = 'Email Verification';
+        $data['bread'] = ['Settings|setting', 'Email Verification'];
+
+        $this->plugin->set('scrollbar');
+        return $this->view('setting/verification/email', $data);
     }
 }

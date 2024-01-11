@@ -37,9 +37,11 @@ class UserModel extends BaseModel
     public function where($where)
     {
         $this->alias('where', [
-            'hash'  => 'd_user.hash',
-            'user'  => 'd_user.username',
-            'email' => 'd_user.email'
+            'id'     => 'd_user.id',
+            'hash'   => 'd_user.hash',
+            'user'   => 'd_user.username',
+            'email'  => 'd_user.email',
+            'active' => 'd_user.active'
         ]);
         return parent::where($where);
     }
@@ -54,9 +56,9 @@ class UserModel extends BaseModel
             'id', 'hash', 'user', 'email', 'pass', 'nama',
             'image', 'access_id', 'agent_id', 'agent'
 
-        ])->where(['user' => $user])->compile();
-        $query .= ' OR `d_user`.`email` = ?';
-        $userdata = $this->query($query, [$user])->getResultArray();
+        ])->where(['active' => 1])->compile();
+        $query .= ' AND (`d_user`.`username` = ? OR `d_user`.`email` = ?)';
+        $userdata = $this->query($query, [$user, $user])->getResultArray();
 
         if (sizeof($userdata) === 1) {
             $result['data'] = $userdata[0];
