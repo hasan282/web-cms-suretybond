@@ -79,12 +79,11 @@ $invalidPass = $flash['invalid'] == 'pass' ? ' is-invalid' : '';
         let t = () => "" == $("#inputuser").val() || "" == $("#inputpass").val();
         $("input.login-input").on("input", function() {
             let i = $(this).attr("id"),
-                a = $(this).attr("placeholder");
-            $(this).removeClass("is-invalid"), $("#failmessage").data("input") == i && $("#failmessage").data("input", "0").html(""), $("#" + i + "_label").html("" == $("#" + i).val() ? "" : a), $("#loginbutton").prop("disabled", t())
+                n = $(this).attr("placeholder");
+            $(this).removeClass("is-invalid"), $("#failmessage").data("input") == i && $("#failmessage").data("input", "0").html(""), $("#" + i + "_label").html("" == $("#" + i).val() ? "" : n), $("#loginbutton").prop("disabled", t())
         }), $('form[method="post"]').on("submit", function(i) {
             t() && i.preventDefault()
-        });
-        if ($("#inputuser").val() != '') $("#inputuser").trigger("input");
+        }), "" != $("#inputuser").val() && $("#inputuser").trigger("input")
     });
 </script>
 <?= $this->endSection(); ?>

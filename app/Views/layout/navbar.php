@@ -6,7 +6,7 @@ $userSubInfo = userdata('agent') ?? 'PT ABC Indonesia';
 
 $navMenu = array(
     ['menu' => 'Dashboard', 'url' => '/dashboard', 'icon' => 'fas fa-tachometer-alt'],
-    ['menu' => 'Pencarian', 'url' => '#search', 'icon' => 'fas fa-search']
+    ['menu' => 'Searching', 'url' => '#search', 'icon' => 'fas fa-search']
 );
 
 ?>
@@ -48,10 +48,10 @@ $navMenu = array(
                 </li>
                 <li class="user-footer">
                     <a href="/setting" class="btn btn-default btn-flat">
-                        <i class="fas fa-cog mr-1"></i>Pengaturan
+                        <i class="fas fa-cog mr-1"></i>Settings
                     </a>
                     <a href="/logout" class="btn btn-default btn-flat float-right">
-                        <i class="fas fa-sign-out-alt mr-1"></i>Keluar
+                        <i class="fas fa-sign-out-alt mr-1"></i>Logout
                     </a>
                 </li>
             </ul>

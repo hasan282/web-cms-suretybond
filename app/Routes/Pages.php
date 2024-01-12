@@ -29,5 +29,6 @@ $routes->get('/manage/user', 'User::manage');
 $routes->get('/report', 'Report::index');
 
 $routes->get('/setting', 'Setting::index');
+$routes->get('/setting/verification/email', 'Setting::verify');
 
 $routes->get('/logout', 'Login::out');

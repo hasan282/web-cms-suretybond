@@ -60,7 +60,6 @@ class User extends Seeder
                 $dat['agent'],
                 $agent
             ) ? $agent[$dat['agent']] : null;
-            $row['email_valid'] = 0;
             $row['active']      = 1;
 
             $user[] = $row;

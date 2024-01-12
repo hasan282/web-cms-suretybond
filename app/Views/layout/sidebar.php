@@ -63,7 +63,7 @@ $navigations = \App\Models\Core\SideMenu::get($userRole);
                 <li class="nav-item">
                     <a href="/setting" class="nav-link <?= url_is('setting*') ? ' active' : ''; ?>">
                         <i class="nav-icon fas fa-cog"></i>
-                        <p>Pengaturan Akun</p>
+                        <p>Settings</p>
                     </a>
                 </li>
             </ul>
