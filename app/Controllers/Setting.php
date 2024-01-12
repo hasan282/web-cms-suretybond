@@ -13,7 +13,7 @@ class Setting extends BaseController
         $model = new \App\Models\UserModel;
         $data['title']    = 'Account Settings';
         $data['userdata'] = $model->select([
-            'email', 'valid'
+            'email', 'verify_at'
         ])->where([
             'id' => userdata('id')
         ])->data(false);
@@ -29,7 +29,21 @@ class Setting extends BaseController
         $data['title'] = 'Email Verification';
         $data['bread'] = ['Settings|setting', 'Email Verification'];
 
-        $this->plugin->set('scrollbar');
+        $this->plugin->set('scrollbar|inputmask');
         return $this->view('setting/verification/email', $data);
+    }
+
+    public function verifyProcess()
+    {
+        if (!is_login()) return $this->login();
+
+        $otp = space_replace($this->request->getPost('verifyotp'), '');
+
+
+        var_dump($otp);
+    }
+
+    public function verifySend()
+    {
     }
 }

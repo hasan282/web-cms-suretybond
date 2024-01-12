@@ -31,6 +31,12 @@ class User extends Migration
                 'null'       => true,
                 'default'    => null
             ],
+            'id_verify'       => [
+                'type'       => 'VARCHAR',
+                'constraint' => 16,
+                'null'       => true,
+                'default'    => null
+            ],
             'password'    => [
                 'type'       => 'VARCHAR',
                 'constraint' => 50,
@@ -60,12 +66,6 @@ class User extends Migration
                 'constraint' => 16,
                 'null'       => true,
                 'default'    => null
-            ],
-            'email_valid' => [
-                'type'       => 'TINYINT',
-                'constraint' => 1,
-                'unsigned'   => true,
-                'default'    => 0
             ],
             'active'      => [
                 'type'       => 'TINYINT',

@@ -1,6 +1,6 @@
 <?php
 
-$verivied = intval($userdata['valid']) === 1;
+$verivied = $userdata['verify_at'] !== null;
 
 ?>
 

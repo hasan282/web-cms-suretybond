@@ -14,7 +14,7 @@ $bread = $bread ?? $title;
 
         <?= $this->include('layout/sidebar'); ?>
 
-        <div class="content-wrapper bg-pattern<?= $darkmode ? '-dark' : ''; ?>" id="contentwrapper">
+        <div class="content-wrapper bg-pattern">
             <div class="content-header">
                 <div class="container content-box">
                     <div class="row mb-2">

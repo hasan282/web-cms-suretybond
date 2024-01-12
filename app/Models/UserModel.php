@@ -13,12 +13,12 @@ class UserModel extends BaseModel
             'hash'      => 'hash',
             'user'      => 'username',
             'email'     => 'email',
+            'verify'    => 'id_verify',
             'pass'      => 'password',
             'nama'      => 'nama',
             'image'     => 'image',
             'access_id' => 'id_access',
             'agent_id'  => 'id_agent',
-            'valid'     => 'email_valid',
             'active'    => 'active'
         ]);
         $this->fields('d_agent', [
@@ -30,7 +30,13 @@ class UserModel extends BaseModel
             'tipe'         => 'tipe',
             'active_agent' => 'active'
         ]);
+        $this->fields('h_email_verify', [
+            'verify_user' => 'id_user',
+            'otp'         => 'otp',
+            'verify_at'   => 'verified',
+        ]);
         $this->join('d_user.id_agent=d_agent.id', 'left');
+        $this->join('d_user.id_verify=h_email_verify.id', 'left');
         return parent::select($fields);
     }
 
