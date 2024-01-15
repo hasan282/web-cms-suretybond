@@ -13,7 +13,7 @@ class Certificate extends BaseController
         $data['title'] = 'List of Certificate';
 
         $this->plugin->set('scrollbar');
-        return $this->view('certificate/index', $data);
+        return $this->view('layout/blank', $data);
     }
 
     public function add()

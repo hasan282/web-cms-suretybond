@@ -36,7 +36,8 @@ class Setting extends BaseController
         ])->data(false);
 
         $this->plugin->set('scrollbar|inputmask');
-        return $this->view('setting/verification/email', $data);
+        // return $this->view('setting/verification/email', $data);
+        return $this->view('layout/blank', $data);
     }
 
     public function verifyProcess()
