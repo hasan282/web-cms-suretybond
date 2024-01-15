@@ -1,12 +1,12 @@
 <?php
 
-$userName    = userdata('nama')   ?? 'User Name';
-$userImage   = userdata('foto')   ?? 'https://avatars.githubusercontent.com/u/47323055';
-$userSubInfo = userdata('office') ?? 'PT ABC Indonesia';
+$userName    = userdata('nama')  ?? 'User Name';
+$userImage   = userdata('foto')  ?? 'default/USER000M.jpg';
+$userSubInfo = userdata('agent') ?? 'PT ABC Indonesia';
 
 $navMenu = array(
     ['menu' => 'Dashboard', 'url' => '/dashboard', 'icon' => 'fas fa-tachometer-alt'],
-    ['menu' => 'Pencarian', 'url' => '#search', 'icon' => 'fas fa-search']
+    ['menu' => 'Searching', 'url' => '#search', 'icon' => 'fas fa-search']
 );
 
 ?>
@@ -38,21 +38,20 @@ $navMenu = array(
 
         <li class="nav-item dropdown user-menu">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                <img src="<?= $userImage; ?>" class="user-image img-circle elevation-1" alt="">
-                <span class="d-none d-md-inline"><?= $userName; ?></span>
+                <img src="/image/<?= $userImage; ?>" class="user-image img-circle elevation-1" alt="">
             </a>
             <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <li class="user-header">
-                    <img src="<?= $userImage; ?>" class="img-circle elevation-2" alt="">
+                    <img src="/image/<?= $userImage; ?>" class="img-circle elevation-2" alt="">
                     <p><?= $userName; ?></p>
                     <small><?= $userSubInfo; ?></small>
                 </li>
                 <li class="user-footer">
-                    <a href="#setting" class="btn btn-default btn-flat">
-                        <i class="fas fa-cog mr-1"></i>Pengaturan
+                    <a href="/setting" class="btn btn-default btn-flat">
+                        <i class="fas fa-cog mr-1"></i>Settings
                     </a>
-                    <a href="#logout" class="btn btn-default btn-flat float-right">
-                        <i class="fas fa-sign-out-alt mr-1"></i>Keluar
+                    <a href="/logout" class="btn btn-default btn-flat float-right">
+                        <i class="fas fa-sign-out-alt mr-1"></i>Logout
                     </a>
                 </li>
             </ul>

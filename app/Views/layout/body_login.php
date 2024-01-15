@@ -2,7 +2,7 @@
 
 <?= $this->section('body'); ?>
 
-<body class="hold-transition login-page<?= $darkmode ? ' dark-mode' : ''; ?> bg-pattern<?= $darkmode ? '-dark' : ''; ?>" id="contentwrapper">
+<body class="hold-transition login-page<?= $darkmode ? ' dark-mode' : ''; ?> bg-pattern">
     <div class="login-box">
 
         <?= $this->renderSection('login_box'); ?>

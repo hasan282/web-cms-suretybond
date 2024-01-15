@@ -4,14 +4,13 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 
-class Dashboard extends BaseController
+class Blanko extends BaseController
 {
     public function index()
     {
-        if (!is_login()) return redirect()->to('');
+        if (!is_login()) return $this->login();
 
-        $data['title'] = 'Dashboard';
-
+        $data['title'] = 'Blanko Monitoring';
         $this->plugin->set('scrollbar');
         return $this->view('layout/blank', $data);
     }

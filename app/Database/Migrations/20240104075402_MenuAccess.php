@@ -34,8 +34,8 @@ class MenuAccess extends Migration
         $this->forge->addKey('id_access', false, false, 'ACCESS');
         $this->forge->addKey('id_menu', false, false, 'MENU');
 
-        $this->forge->addForeignKey('id_access', 'c_access', 'id', 'CASCADE', 'CASCADE', 'ACCESSID');
-        $this->forge->addForeignKey('id_menu', 'c_menu', 'id', 'CASCADE', 'CASCADE', 'MENUID');
+        $this->forge->addForeignKey('id_access', 'c_access', 'id', 'CASCADE', 'CASCADE', 'LINKACCESS');
+        $this->forge->addForeignKey('id_menu', 'c_menu', 'id', 'CASCADE', 'CASCADE', 'LINKMENU');
 
         $this->forge->createTable('c_menu_access', true, [
             'ENGINE' => 'InnoDB'

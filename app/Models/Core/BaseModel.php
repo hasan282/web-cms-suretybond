@@ -270,9 +270,15 @@ class BaseModel
         }
     }
 
-    protected function query(string $query)
+    protected function query(string $query, $bind = null)
     {
-        return $this->connect->query($query);
+        return $this->connect->query($query, $bind);
+    }
+
+    protected function compile(): string
+    {
+        $build = $this->_build();
+        return $build->select($this->fieldselect)->getCompiledSelect();
     }
 
     private function _build()

@@ -69,4 +69,14 @@ abstract class BaseController extends Controller
         $viewscript = view($view, $data);
         return env_is('production') ? space_replace($viewscript) : $viewscript;
     }
+
+    protected function login()
+    {
+        $gets = $this->request->getGet();
+        $uri  = uri_string();
+        if (!empty($gets))
+            $uri = $uri . '?' . http_build_query($gets);
+        $this->session->setFlashdata('requesturl', $uri);
+        return redirect()->to('');
+    }
 }

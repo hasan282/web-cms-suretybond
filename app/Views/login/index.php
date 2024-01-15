@@ -2,6 +2,13 @@
 
 <?= $this->section('login_box'); ?>
 
+<?php
+
+$invalidUser = $flash['invalid'] == 'user' ? ' is-invalid' : '';
+$invalidPass = $flash['invalid'] == 'pass' ? ' is-invalid' : '';
+
+?>
+
 <div class="mx-auto mb-3" style="max-width:100px">
     <a href="/" class="link-transparent">
         <img class="img-fluid" src="/image/icon/icon-128.png">
@@ -12,26 +19,32 @@
     <div class="card-body login-card-body">
         <form method="post">
 
-            <input type="hidden" name="urrequest" value="">
+            <input type="hidden" name="urrequest" value="<?= $flash['url']; ?>">
             <?= csrf_field(); ?>
 
-            <div>
-                <small class="text-secondary ml-2" id="inputuser_label"></small>
-            </div>
-            <input type="text" name="inputuser" id="inputuser" placeholder="Username or Email" class="form-control login-input is-invalid">
+            <?php if ($userdata === null) : ?>
+
+                <div><small class="text-secondary ml-2" id="inputuser_label"></small></div>
+                <input type="text" name="inputuser" id="inputuser" placeholder="Username or Email" class="form-control login-input<?= $invalidUser; ?>" value="<?= $flash['username']; ?>">
+
+            <?php else : ?>
+
+                <?= $this->include('login/userimage'); ?>
+
+            <?php endif; ?>
 
             <div>
                 <small class="text-secondary ml-2" id="inputpass_label"></small>
             </div>
             <div class="input-group">
-                <input type="password" name="inputpass" id="inputpass" class="form-control login-input is-invalid" placeholder="Password">
+                <input type="password" name="inputpass" id="inputpass" class="form-control login-input<?= $invalidPass; ?>" placeholder="Password">
                 <div class="input-group-append">
                     <div class="input-group-text showpass" data-target="inputpass"></div>
                 </div>
             </div>
 
             <div style="height:27px" class="text-center text-danger mt-2">
-                <small id="failmessage" data-input="inputpass">Your Password is Wrong</small>
+                <small id="failmessage" data-input="inputpass"><?= $flash['message']; ?></small>
             </div>
 
             <div class="text-center mt-2">
@@ -66,11 +79,11 @@
         let t = () => "" == $("#inputuser").val() || "" == $("#inputpass").val();
         $("input.login-input").on("input", function() {
             let i = $(this).attr("id"),
-                a = $(this).attr("placeholder");
-            $(this).removeClass("is-invalid"), $("#failmessage").data("input") == i && $("#failmessage").data("input", "0").html(""), $("#" + i + "_label").html("" == $("#" + i).val() ? "" : a), $("#loginbutton").prop("disabled", t())
+                n = $(this).attr("placeholder");
+            $(this).removeClass("is-invalid"), $("#failmessage").data("input") == i && $("#failmessage").data("input", "0").html(""), $("#" + i + "_label").html("" == $("#" + i).val() ? "" : n), $("#loginbutton").prop("disabled", t())
         }), $('form[method="post"]').on("submit", function(i) {
             t() && i.preventDefault()
-        })
+        }), "" != $("#inputuser").val() && $("#inputuser").trigger("input")
     });
 </script>
 <?= $this->endSection(); ?>

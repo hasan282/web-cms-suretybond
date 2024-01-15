@@ -45,6 +45,5 @@ if (!function_exists('hash_match')) {
             $results[] = $hashlib->hash($text, HASH_KEYWORD);
         }
         return in_array($hash, $results);
-        // return $results;
     }
 }

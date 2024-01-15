@@ -25,7 +25,8 @@ $application_title = 'Jasmin-e';
             background-color: #F4F6F9;
         }
 
-        .bg-pattern-dark {
+        .dark-mode.bg-pattern,
+        .dark-mode .bg-pattern {
             background-image: url("<?= base_url('image/pattern/pattern-dark.webp'); ?>");
             background-color: #454D55;
         }

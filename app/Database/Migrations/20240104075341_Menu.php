@@ -45,7 +45,7 @@ class Menu extends Migration
         $this->forge->addUniqueKey('url', 'LINK');
         $this->forge->addKey('id_group', false, false, 'GROUP');
 
-        $this->forge->addForeignKey('id_group', 'c_menu_group', 'id', 'CASCADE', 'SET NULL', 'GROUPID');
+        $this->forge->addForeignKey('id_group', 'c_menu_group', 'id', 'CASCADE', 'SET NULL', 'MENUGROUP');
 
         $this->forge->createTable('c_menu', true, [
             'ENGINE' => 'InnoDB'

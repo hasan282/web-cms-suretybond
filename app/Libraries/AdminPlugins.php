@@ -9,16 +9,16 @@ class AdminPlugins extends Plugin
     protected function plugins()
     {
         $refresh = env_is('production') ? '' : '?plug=in' . mt_rand(1000, 9999);
-        $minify  = env_is('production') ? '.min.js' : '.js';
+        $minify  = env_is('production') ? '.min' : '';
 
         $this->plugin('basic', array(
             ['https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback', 'css', 'head'],
             ['/adminlte/asset/css/adminlte.min.css',                   'css', 'head'],
-            ['/asset/css/admin.min.css' . $refresh,                    'css', 'head'],
+            ['/asset/css/admin' . $minify . '.css' . $refresh,         'css', 'head'],
             ['/adminlte/plugins/jquery/jquery.min.js',                 'js',  'foot'],
             ['/adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js', 'js',  'foot'],
             ['/adminlte/asset/js/adminlte.min.js',                     'js',  'foot'],
-            ['/asset/jscore/functions' . $minify . $refresh,           'js',  'foot']
+            ['/asset/jscore/functions' . $minify . '.js' . $refresh,   'js',  'foot']
         ));
 
         $this->plugin('fontawesome', array(
@@ -43,23 +43,17 @@ class AdminPlugins extends Plugin
             ['/adminlte/plugins/toastr/toastr.min.js',  'js',  'foot']
         ));
 
-        $this->plugin('dateinput', array(
-            ['/adminlte/plugins/daterangepicker/daterangepicker.css',                             'css', 'head'],
-            ['/adminlte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css', 'css', 'head'],
-            ['/adminlte/plugins/moment/moment.min.js',                                            'js',  'foot'],
-            ['/adminlte/plugins/inputmask/jquery.inputmask.min.js',                               'js',  'foot'],
-            ['/adminlte/plugins/daterangepicker/daterangepicker.js',                              'js',  'foot'],
-            ['/adminlte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js',   'js',  'foot']
+        $this->plugin('inputmask', array(
+            ['/adminlte/plugins/inputmask/jquery.inputmask.min.js', 'js', 'foot']
         ));
 
         $this->plugin('dateinput', array(
             ['/adminlte/plugins/daterangepicker/daterangepicker.css',                             'css', 'head'],
             ['/adminlte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css', 'css', 'head'],
             ['/adminlte/plugins/moment/moment.min.js',                                            'js',  'foot'],
-            ['/adminlte/plugins/inputmask/jquery.inputmask.min.js',                               'js',  'foot'],
             ['/adminlte/plugins/daterangepicker/daterangepicker.js',                              'js',  'foot'],
             ['/adminlte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js',   'js',  'foot'],
-            ['/asset/jscore/input.date' . $minify,                                                'js',  'foot']
+            ['/asset/jscore/input.date' . $minify . '.js' . $refresh,                             'js',  'foot']
         ));
 
         $this->plugin('jspdf', array(
