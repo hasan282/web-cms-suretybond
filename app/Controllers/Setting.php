@@ -26,8 +26,14 @@ class Setting extends BaseController
     {
         if (!is_login()) return $this->login();
 
-        $data['title'] = 'Email Verification';
-        $data['bread'] = ['Settings|setting', 'Email Verification'];
+        $model = new \App\Models\UserModel;
+        $data['title']    = 'Email Verification';
+        $data['bread']    = ['Settings|setting', 'Email Verification'];
+        $data['userdata'] = $model->select([
+            'email', 'verify_at'
+        ])->where([
+            'id' => userdata('id')
+        ])->data(false);
 
         $this->plugin->set('scrollbar|inputmask');
         return $this->view('setting/verification/email', $data);
@@ -45,5 +51,12 @@ class Setting extends BaseController
 
     public function verifySend()
     {
+        $code = mt_rand(100000, 999999);
+
+        $email = new \App\Libraries\Email;
+        $email
+            ->setReceiver('hsn.abdullah282@gmail.com', 'Hasan Abdullah')
+            ->setSubject('Email Verification OTP Code');
+        $sendResult = $email->sendOTP($code);
     }
 }

@@ -18,19 +18,25 @@ class Email
             'SMTPCrypto' => 'ssl'
         );
         $this->setting   = array(
-            'sender'     => 'PTJIS Suretybond',
+            'sender'     => 'JIS Suretybond',
             'receiver'   => null,
             'subject'    => 'Pengiriman Email',
-            'viewpath'   => 'layout/email',
-            'title'      => '-',
-            'name'       => null,
-            'content'    => '-',
-            'link'       => '#',
-            'button'     => 'Klik Disini'
+            'viewpath'   => 'email/basic'
         );
     }
 
-    public function send()
+    public function sendOTP(int $otp)
+    {
+        $this->setting['viewpath'] = 'email/basic';
+
+        $data = array(
+            'name' => $this->setting['name'],
+            'otp' => '' . $otp
+        );
+        return $this->send($data);
+    }
+
+    private function send(array $data = [])
     {
         if ($this->setting['receiver'] === null) return false;
 
@@ -42,13 +48,7 @@ class Email
         );
         $email->setTo($this->setting['receiver']);
         $email->setSubject($this->setting['subject']);
-        $data = array(
-            'mail_title'    => $this->setting['title'],
-            'mail_receiver' => $this->setting['name'] ?? $this->setting['receiver'],
-            'mail_content'  => $this->setting['content'],
-            'mail_link'     => $this->setting['link'],
-            'button_text'   => $this->setting['button']
-        );
+
         $mailcontent = space_replace(view($this->setting['viewpath'], $data));
         $email->setMessage($mailcontent);
 
@@ -58,28 +58,13 @@ class Email
     public function setReceiver(string $email, ?string $name = null)
     {
         $this->setting['receiver'] = $email;
-        if ($name !== null)
-            $this->setting['name'] = $name;
+        $this->setting['name'] = $name === null ? $email : $name;
         return $this;
     }
 
-    public function setTitle(string $subject, string $title)
+    public function setSubject(string $subject)
     {
         $this->setting['subject'] = $subject;
-        $this->setting['title']   = $title;
-        return $this;
-    }
-
-    public function setContent(string $content)
-    {
-        $this->setting['content'] = $content;
-        return $this;
-    }
-
-    public function setButton(string $text, string $link)
-    {
-        $this->setting['button'] = $text;
-        $this->setting['link']   = $link;
         return $this;
     }
 }

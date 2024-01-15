@@ -15,13 +15,12 @@ $placeholder = '_ _ _ _ _ _';
         background-color: #fff;
         background-size: 270px;
         background-repeat: no-repeat;
-        background-position: center;
-        height: 170px;
+        background-position: center top;
         border-radius: 12px;
     }
 
     .dark-mode .open-email-picture {
-        opacity: 0.2;
+        filter: invert(0.8);
     }
 </style>
 
@@ -30,12 +29,16 @@ $placeholder = '_ _ _ _ _ _';
     <div class="card">
         <div class="card-body">
 
-            <div class="text-center">
+            <div class="text-sm-center mb-2">
 
-                <div class="open-email-picture"></div>
+                <div class="open-email-picture">
+                    <div style="height:170px"></div>
+                    <div class="py-1">
+                        <p class="text-secondary text-sm mb-0">We have sent an email containing the OTP code to the address <strong><?= $userdata['email']; ?></strong>.</p>
+                        <p class="text-secondary text-sm">Please check your email and enter the OTP code below.</p>
+                    </div>
+                </div>
 
-                <p class="text-secondary text-sm mb-0">We have sent an email containing the OTP code to the address <strong>admin@ptjis.id</strong>.</p>
-                <p class="text-secondary text-sm">Please check your email and enter the OTP code below.</p>
 
             </div>
 
