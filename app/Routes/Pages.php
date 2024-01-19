@@ -29,6 +29,10 @@ $routes->get('/manage/user', 'User::manage');
 $routes->get('/report', 'Report::index');
 
 $routes->get('/setting', 'Setting::index');
+$routes->get('/setting/change/name', 'Setting::name');
+$routes->get('/setting/change/email', 'Setting::email');
+$routes->get('/setting/change/username', 'Setting::username');
+$routes->get('/setting/change/password', 'Setting::password');
 $routes->get('/setting/verification/email', 'Setting::verify');
 
 $routes->get('/logout', 'Login::out');

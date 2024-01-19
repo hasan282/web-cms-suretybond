@@ -22,6 +22,40 @@ class Setting extends BaseController
         return $this->view('setting/index', $data);
     }
 
+    public function name()
+    {
+        if (!is_login()) return $this->login();
+
+        $data['title'] = 'Change';
+        return $this->view('layout/blank', $data);
+    }
+
+    public function email()
+    {
+        if (!is_login()) return $this->login();
+
+        $data['title'] = 'Change User Email';
+        $data['bread']    = ['Settings|setting', 'Change Email'];
+
+        return $this->view('layout/blank', $data);
+    }
+
+    public function username()
+    {
+        if (!is_login()) return $this->login();
+
+        $data['title'] = 'Change';
+        return $this->view('layout/blank', $data);
+    }
+
+    public function password()
+    {
+        if (!is_login()) return $this->login();
+
+        $data['title'] = 'Change';
+        return $this->view('layout/blank', $data);
+    }
+
     public function verify()
     {
         if (!is_login()) return $this->login();
@@ -36,8 +70,7 @@ class Setting extends BaseController
         ])->data(false);
 
         $this->plugin->set('scrollbar|inputmask');
-        // return $this->view('setting/verification/email', $data);
-        return $this->view('layout/blank', $data);
+        return $this->view('setting/verification/email', $data);
     }
 
     public function verifyProcess()
