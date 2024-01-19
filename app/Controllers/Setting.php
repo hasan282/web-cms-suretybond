@@ -26,8 +26,9 @@ class Setting extends BaseController
     {
         if (!is_login()) return $this->login();
 
-        $data['title'] = 'Change';
-        return $this->view('layout/blank', $data);
+        $data['title'] = 'Change Full Name';
+        $data['bread'] = ['Settings|setting', 'Change Full Name'];
+        return $this->view('setting/change/name', $data);
     }
 
     public function email()
@@ -35,25 +36,27 @@ class Setting extends BaseController
         if (!is_login()) return $this->login();
 
         $data['title'] = 'Change User Email';
-        $data['bread']    = ['Settings|setting', 'Change Email'];
+        $data['bread'] = ['Settings|setting', 'Change Email'];
 
-        return $this->view('layout/blank', $data);
+        return $this->view('setting/change/email', $data);
     }
 
     public function username()
     {
         if (!is_login()) return $this->login();
 
-        $data['title'] = 'Change';
-        return $this->view('layout/blank', $data);
+        $data['title'] = 'Change Username';
+        $data['bread'] = ['Settings|setting', 'Change Username'];
+        return $this->view('setting/change/username', $data);
     }
 
     public function password()
     {
         if (!is_login()) return $this->login();
 
-        $data['title'] = 'Change';
-        return $this->view('layout/blank', $data);
+        $data['title'] = 'Change User Password';
+        $data['bread'] = ['Settings|setting', 'Change Password'];
+        return $this->view('setting/change/password', $data);
     }
 
     public function verify()

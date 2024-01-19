@@ -26,6 +26,7 @@
   color: #fff;
 }
 
+.dark-mode .card-title a,
 .dark-mode footer a {
   color: #45b1f9;
 }
@@ -47,11 +48,11 @@
 }
 
 .dark-mode .breadcrumb-item:not(.active) > a {
-  color: #66a8ee;
+  color: #45b1f9;
 }
 
 .dark-mode .breadcrumb-item:not(.active) > a:hover {
-  color: #9dccff;
+  color: #0099ff;
 }
 
 .dark-mode .content-box .container {
