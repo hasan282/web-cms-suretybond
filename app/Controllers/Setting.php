@@ -28,6 +28,8 @@ class Setting extends BaseController
 
         $data['title'] = 'Change Full Name';
         $data['bread'] = ['Settings|setting', 'Change Full Name'];
+
+        $this->plugin->set('scrollbar');
         return $this->view('setting/change/name', $data);
     }
 
@@ -35,9 +37,14 @@ class Setting extends BaseController
     {
         if (!is_login()) return $this->login();
 
+        $model = new \App\Models\UserModel;
+        $email = $model->select(['email'])->where(['id' => userdata('id')])->data(false);
+
         $data['title'] = 'Change User Email';
         $data['bread'] = ['Settings|setting', 'Change Email'];
+        $data['email'] = $email['email'];
 
+        $this->plugin->set('scrollbar|icheck');
         return $this->view('setting/change/email', $data);
     }
 
@@ -47,6 +54,8 @@ class Setting extends BaseController
 
         $data['title'] = 'Change Username';
         $data['bread'] = ['Settings|setting', 'Change Username'];
+
+        $this->plugin->set('scrollbar');
         return $this->view('setting/change/username', $data);
     }
 
@@ -56,6 +65,8 @@ class Setting extends BaseController
 
         $data['title'] = 'Change User Password';
         $data['bread'] = ['Settings|setting', 'Change Password'];
+
+        $this->plugin->set('scrollbar');
         return $this->view('setting/change/password', $data);
     }
 
