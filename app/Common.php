@@ -14,6 +14,11 @@
  * @see: https://codeigniter.com/user_guide/extending/common.html
  */
 
+/**
+ * a default password for all new user
+ */
+define('DEFAULT_PASSWORD', 'jasmine');
+
 if (!function_exists('env_is')) {
     /** check codeigniter environtment
      * @param string $env development or production
@@ -35,3 +40,8 @@ if (!function_exists('space_replace')) {
         return trim($result);
     }
 }
+
+/**
+ * @var string|null 404 override
+ */
+define('OVERRIDE_404', env_is('production') ? 'App\Controllers\Errors::index' : null);

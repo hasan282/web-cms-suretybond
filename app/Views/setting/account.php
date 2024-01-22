@@ -8,9 +8,9 @@ $verivied = $userdata['verify_at'] !== null;
     <td class="text-bold align-middle">Full Name</td>
     <td class="align-middle"><?= userdata('nama'); ?></td>
     <td class="text-right align-middle">
-        <button type="button" class="btn btn-sm btn-link">
+        <a type="button" class="btn btn-sm btn-link" href="/setting/change/name">
             Change Full Name<i class="fas fa-chevron-right ml-3"></i>
-        </button>
+        </a>
     </td>
 </tr>
 
@@ -22,9 +22,9 @@ $verivied = $userdata['verify_at'] !== null;
             <?= $userdata['email']; ?><i class="fas fa-check-circle text-success ml-2"></i>
         </td>
         <td class="text-right align-middle">
-            <button type="button" class="btn btn-sm btn-link">
+            <a type="button" class="btn btn-sm btn-link" href="/setting/change/email">
                 Change Email<i class="fas fa-chevron-right ml-3"></i>
-            </button>
+            </a>
         </td>
     </tr>
 
@@ -46,9 +46,9 @@ $verivied = $userdata['verify_at'] !== null;
             </p>
         </td>
         <td class="text-right align-middle">
-            <button type="button" class="btn btn-sm btn-link">
+            <a type="button" class="btn btn-sm btn-link" href="/setting/change/email">
                 Change Email<i class="fas fa-chevron-right ml-3"></i>
-            </button>
+            </a>
         </td>
     </tr>
 
@@ -58,9 +58,9 @@ $verivied = $userdata['verify_at'] !== null;
     <td class="text-bold align-middle">Username</td>
     <td class="align-middle"><?= userdata('user'); ?></td>
     <td class="text-right align-middle">
-        <button type="button" class="btn btn-sm btn-link">
+        <a type="button" class="btn btn-sm btn-link" href="/setting/change/username">
             Change Username<i class="fas fa-chevron-right ml-3"></i>
-        </button>
+        </a>
     </td>
 </tr>
 
@@ -68,8 +68,8 @@ $verivied = $userdata['verify_at'] !== null;
     <td class="text-bold align-middle">Password</td>
     <td class="align-middle">*****</td>
     <td class="text-right align-middle">
-        <button type="button" class="btn btn-sm btn-link">
+        <a type="button" class="btn btn-sm btn-link" href="/setting/change/password">
             Change Password<i class="fas fa-chevron-right ml-3"></i>
-        </button>
+        </a>
     </td>
 </tr>

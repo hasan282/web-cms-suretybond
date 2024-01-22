@@ -77,4 +77,16 @@ class UserModel extends BaseModel
             return $result;
         }
     }
+
+    public function editEmail(string $email, ?string $id)
+    {
+        if ($id === null) return false;
+        $this->connect->transBegin();
+        $this->connect->table('d_user')->update(
+            array('email' => $email, 'id_verify' => null),
+            array('id' => $id)
+        );
+        $this->connect->transComplete();
+        return $this->connect->transStatus();
+    }
 }

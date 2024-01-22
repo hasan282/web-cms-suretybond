@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use CodeIgniter\Exceptions\PageNotFoundException;
 
 class User extends BaseController
 {
@@ -20,9 +21,14 @@ class User extends BaseController
     {
         if (!is_login()) return $this->login();
 
-        $data['title'] = 'Manage User Account';
+        if (!role_is([101, 201])) {
+            throw PageNotFoundException::forPageNotFound();
+        } else {
 
-        $this->plugin->set('scrollbar');
-        return $this->view('layout/blank', $data);
+            $data['title'] = 'Manage User Account';
+
+            $this->plugin->set('scrollbar');
+            return $this->view('layout/blank', $data);
+        }
     }
 }
