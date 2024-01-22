@@ -85,7 +85,8 @@ class Setting extends BaseController
         ])->data(false);
 
         $this->plugin->set('scrollbar|inputmask');
-        return $this->view('setting/verification/email', $data);
+        // return $this->view('setting/verification/email', $data);
+        return $this->view('layout/blank', $data);
     }
 
     // ---------------------------------------------------------------------
@@ -123,21 +124,25 @@ class Setting extends BaseController
 
     public function verifyProcess()
     {
-        if (!is_login()) return $this->login();
+        return redirect()->to('setting');
 
-        $otp = space_replace($this->request->getPost('verifyotp'), '');
+        // if (!is_login()) return $this->login();
 
-        var_dump($otp);
+        // $otp = space_replace($this->request->getPost('verifyotp'), '');
+
+        // var_dump($otp);
     }
 
     public function verifySend()
     {
-        $code = mt_rand(100000, 999999);
+        return redirect()->to('setting');
 
-        $email = new \App\Libraries\Email;
-        $email
-            ->setReceiver('hsn.abdullah282@gmail.com', 'Hasan Abdullah')
-            ->setSubject('Email Verification OTP Code');
-        $sendResult = $email->sendOTP($code);
+        // $code = mt_rand(100000, 999999);
+
+        // $email = new \App\Libraries\Email;
+        // $email
+        //     ->setReceiver('hsn.abdullah282@gmail.com', 'Hasan Abdullah')
+        //     ->setSubject('Email Verification OTP Code');
+        // $sendResult = $email->sendOTP($code);
     }
 }
