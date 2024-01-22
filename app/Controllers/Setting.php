@@ -87,12 +87,42 @@ class Setting extends BaseController
         return $this->view('setting/verification/email', $data);
     }
 
+    // ---------------------------------------------------------------------
+    // -------- POST METHOD ------------------------------------------------
+
+    public function emailChange()
+    {
+        if (!is_login()) return $this->login();
+
+        $email  = $this->request->getPost('emailaddr');
+        $verify = $this->request->getPost('verifynext') == 'on';
+
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL))
+            return redirect()->to('setting/change/email');
+
+        $model = new \App\Models\UserModel;
+        $model->select(['id'])->where(['email' => $email]);
+        $emailUser = $model->data(false)['id'] ?? null;
+
+        if ($emailUser == userdata('id')) return redirect()->to('setting');
+        if ($emailUser !== null) {
+            // email sudah terpakai
+
+            return redirect()->to('setting/change/email');
+        } else {
+            // change email
+
+            return redirect()->to(
+                $verify ? 'setting/verification/email' : 'setting'
+            );
+        }
+    }
+
     public function verifyProcess()
     {
         if (!is_login()) return $this->login();
 
         $otp = space_replace($this->request->getPost('verifyotp'), '');
-
 
         var_dump($otp);
     }

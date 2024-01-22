@@ -31,6 +31,10 @@
   color: #45b1f9;
 }
 
+.dark-mode .card .text-primary {
+  color: #45b1f9 !important;
+}
+
 .dark-mode .list-group .list-group-item.active {
   background-color: #3f6791;
 }

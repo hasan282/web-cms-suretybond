@@ -9,3 +9,5 @@ $routes->post('/', 'Login::process', ['filter' => 'csrf']);
 
 $routes->post('/setting/verification/email', 'Setting::verifyProcess');
 $routes->post('/setting/verification/send/email', 'Setting::verifySend');
+
+$routes->post('/setting/change/email', 'Setting::emailChange');
