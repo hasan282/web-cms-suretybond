@@ -43,6 +43,7 @@ class Setting extends BaseController
         $data['title'] = 'Change User Email';
         $data['bread'] = ['Settings|setting', 'Change Email'];
         $data['email'] = $email['email'];
+        $data['flash'] = $this->session->getFlashdata('usedemail');
 
         $this->plugin->set('scrollbar|icheck');
         return $this->view('setting/change/email', $data);
@@ -94,7 +95,7 @@ class Setting extends BaseController
     {
         if (!is_login()) return $this->login();
 
-        $email  = $this->request->getPost('emailaddr');
+        $email  = $this->request->getPost('emailaddr') . '';
         $verify = $this->request->getPost('verifynext') == 'on';
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL))
@@ -106,12 +107,14 @@ class Setting extends BaseController
 
         if ($emailUser == userdata('id')) return redirect()->to('setting');
         if ($emailUser !== null) {
-            // email sudah terpakai
-
+            $this->session->setFlashdata('usedemail', $email);
             return redirect()->to('setting/change/email');
         } else {
-            // change email
-
+            if ($model->editEmail($email, userdata('id'))) {
+                // success
+            } else {
+                // failed
+            }
             return redirect()->to(
                 $verify ? 'setting/verification/email' : 'setting'
             );

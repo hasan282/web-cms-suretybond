@@ -40,3 +40,8 @@ if (!function_exists('space_replace')) {
         return trim($result);
     }
 }
+
+/**
+ * @var string|null 404 override
+ */
+define('OVERRIDE_404', env_is('production') ? 'App\Controllers\Errors::index' : null);

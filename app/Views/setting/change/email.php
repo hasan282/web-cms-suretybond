@@ -13,6 +13,11 @@
         </div>
         <div class="card-body">
             <div class="mw-5 mx-auto">
+                <?php if ($flash !== null) : ?>
+                    <p class="text-sm text-danger">
+                        You cannot use the email <strong><?= $flash; ?></strong> as your email because it is already in use by another account. Please use another email.
+                    </p>
+                <?php endif; ?>
                 <form method="post">
                     <div class="form-group">
                         <label for="emailaddr">Your Email Address</label>
