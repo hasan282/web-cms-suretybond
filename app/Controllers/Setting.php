@@ -3,6 +3,8 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\UserModel;
+use CodeIgniter\Exceptions\PageNotFoundException;
 
 class Setting extends BaseController
 {
@@ -10,7 +12,7 @@ class Setting extends BaseController
     {
         if (!is_login()) return $this->login();
 
-        $model = new \App\Models\UserModel;
+        $model = new UserModel;
         $data['title']    = 'Account Settings';
         $data['userdata'] = $model->select([
             'email', 'verify_at'
@@ -37,7 +39,7 @@ class Setting extends BaseController
     {
         if (!is_login()) return $this->login();
 
-        $model = new \App\Models\UserModel;
+        $model = new UserModel;
         $email = $model->select(['email'])->where(['id' => userdata('id')])->data(false);
 
         $data['title'] = 'Change User Email';
@@ -75,18 +77,31 @@ class Setting extends BaseController
     {
         if (!is_login()) return $this->login();
 
-        $model = new \App\Models\UserModel;
+        $limit = 600;
+        $model = new UserModel;
         $data['title']    = 'Email Verification';
         $data['bread']    = ['Settings|setting', 'Email Verification'];
+        $data['jscript']  = 'email.verification';
         $data['userdata'] = $model->select([
-            'email', 'verify_at'
+            'email', 'verify', 'verify_at'
         ])->where([
             'id' => userdata('id')
         ])->data(false);
+        $data['countdown'] = 0;
 
-        $this->plugin->set('scrollbar|inputmask');
-        // return $this->view('setting/verification/email', $data);
-        return $this->view('layout/blank', $data);
+        if ($data['userdata']['verify_at'] !== null) {
+            throw PageNotFoundException::forPageNotFound();
+        } else {
+            if ($data['userdata']['verify'] !== null) {
+                $create = id2date($data['userdata']['verify']);
+                $difference = time() - strtotime($create);
+                if ($difference < $limit) {
+                    $data['countdown'] = $limit - $difference;
+                }
+            }
+            $this->plugin->set('scrollbar|inputmask');
+            return $this->view('setting/verification/email', $data);
+        }
     }
 
     // ---------------------------------------------------------------------
@@ -102,7 +117,7 @@ class Setting extends BaseController
         if (!filter_var($email, FILTER_VALIDATE_EMAIL))
             return redirect()->to('setting/change/email');
 
-        $model = new \App\Models\UserModel;
+        $model = new UserModel;
         $model->select(['id'])->where(['email' => $email]);
         $emailUser = $model->data(false)['id'] ?? null;
 
@@ -124,25 +139,68 @@ class Setting extends BaseController
 
     public function verifyProcess()
     {
-        return redirect()->to('setting');
+        if (!is_login()) return $this->login();
 
-        // if (!is_login()) return $this->login();
-
-        // $otp = space_replace($this->request->getPost('verifyotp'), '');
-
-        // var_dump($otp);
+        $otpCode  = space_replace($this->request->getPost('verifyotp'), '');
+        $model    = new UserModel;
+        $userdata = $model->select(['verify', 'otp'])
+            ->where(['id' => userdata('id')])->data(false);
+        if (intval($otpCode) === intval($userdata['otp'])) {
+            $update = $model->transaction(function ($db) use ($userdata) {
+                $db->table('h_email_verify')->update(
+                    array('verified' => date('Y-m-d H:i:s')),
+                    array('id' => $userdata['verify'])
+                );
+            });
+            if ($update) {
+                // success
+            } else {
+                // failed
+            }
+            return redirect()->to('setting');
+        } else {
+            // wrong otp
+            return redirect()->to('setting/verification/email');
+        }
     }
 
     public function verifySend()
     {
-        return redirect()->to('setting');
+        $status = array(
+            'login'    => false,
+            'userdata' => false,
+            'sendmail' => false,
+            'insert'   => false
+        );
+        if (!is_login()) return $this->response->setJSON(
+            array('status' => $status)
+        );
+        $status['login'] = true;
 
-        // $code = mt_rand(100000, 999999);
+        $model    = new UserModel;
+        $userdata = $model->select([
+            'email', 'nama'
+        ])->where([
+            'id' => userdata('id')
+        ])->data(false);
+        if ($userdata === null) return $this->response->setJSON(
+            array('status' => $status)
+        );
+        $status['userdata'] = true;
 
-        // $email = new \App\Libraries\Email;
-        // $email
-        //     ->setReceiver('hsn.abdullah282@gmail.com', 'Hasan Abdullah')
-        //     ->setSubject('Email Verification OTP Code');
-        // $sendResult = $email->sendOTP($code);
+        $otpCode  = mt_rand(100000, 999999);
+        $email = new \App\Libraries\Email;
+        $email
+            ->setReceiver($userdata['email'], $userdata['nama'])
+            ->setSubject('Email Verification OTP Code');
+        $status['sendmail'] = $email->sendOTP($otpCode);
+        $status['sendmail'] = true;
+
+        if ($status['sendmail']) {
+            $status['insert'] = $model->addVerification($otpCode, userdata('id'));
+        }
+        return $this->response->setJSON(array(
+            'status' => $status
+        ));
     }
 }

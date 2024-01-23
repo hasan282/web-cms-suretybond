@@ -89,4 +89,22 @@ class UserModel extends BaseModel
         $this->connect->transComplete();
         return $this->connect->transStatus();
     }
+
+    public function addVerification(int $otp, ?string $userid)
+    {
+        if ($userid === null) return false;
+        $verifydata = array(
+            'id'      => create_id(),
+            'id_user' => $userid,
+            'otp'     => $otp
+        );
+        $this->connect->transBegin();
+        $this->connect->table('h_email_verify')->insert($verifydata);
+        $this->connect->table('d_user')->update(
+            array('id_verify' => $verifydata['id']),
+            array('id' => $userid)
+        );
+        $this->connect->transComplete();
+        return $this->connect->transStatus();
+    }
 }
