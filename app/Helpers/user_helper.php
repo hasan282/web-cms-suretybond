@@ -97,6 +97,7 @@ if (!function_exists('is_login')) {
     }
 }
 
+/*
 if (!function_exists('login_page')) {
     function login_page(string $url)
     {
@@ -105,6 +106,7 @@ if (!function_exists('login_page')) {
         return redirect()->to('');
     }
 }
+*/
 
 if (!function_exists('role_is')) {
     /**
@@ -114,7 +116,7 @@ if (!function_exists('role_is')) {
     {
         $result = false;
         $session = \Config\Services::session();
-        $role = intval($session->get('userdata_role_id'));
+        $role = intval($session->get('userdata_access'));
         foreach ($roles as $rl) if ($role === intval($rl)) $result = true;
         return $result;
     }

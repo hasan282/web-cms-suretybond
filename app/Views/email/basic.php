@@ -33,7 +33,7 @@ $otPass  = $otp  ?? '666666';
                 <?= implode(' ', str_split($otPass)); ?>
             </div>
 
-            <p>Please promptly enter the OTP code in the provided form, this OTP code is only valid for 5 minutes after the email is sent.</p>
+            <p>Please promptly enter the OTP code in the provided form, this OTP code is only valid for 15 minutes after the email is sent.</p>
 
         </div>
         <div style="max-width:600px;padding-top:5px;padding-bottom:5px;padding-left:30px;padding-right:30px;margin-right:auto;margin-left:auto;text-align:center">

@@ -15,18 +15,29 @@ $(function () {
         BaseURL + "setting/verification/send/email",
         params,
         function (data, status) {
-          if (status == "success" && data.status.userdata) {
-            $("#countdown").data("cd", 600);
+          if (status == "success" && data.status.insert) {
+            $("#countdown").data("cd", 900);
             $("#sendbox").html("");
             $("#verifybox").removeClass("hide-content");
             setCountdown();
           } else {
+            if (data.status.sendmail) {
+              $("#sendbox").html(
+                '<p class="text-danger">Database ERROR, please contact administrator!</p>'
+              );
+            } else if (data.status.userdata) {
+              $("#sendbox").html("");
+              $("#sendfailed").removeClass("hide-content");
+            } else {
+              window.location.reload();
+            }
           }
         }
       ).fail(() => {
-        console.log("ERROR");
+        $("#sendbox").html("");
+        $("#connectfailed").removeClass("hide-content");
       });
-    }, 3000);
+    }, 500);
   }
 
   if ($("#countdown").data("cd") != 0) {

@@ -77,11 +77,11 @@ class Setting extends BaseController
     {
         if (!is_login()) return $this->login();
 
-        $limit = 600;
+        $limit = 900;
         $model = new UserModel;
         $data['title']    = 'Email Verification';
         $data['bread']    = ['Settings|setting', 'Email Verification'];
-        $data['jscript']  = 'email.verification';
+        $data['jscript']  = 'email.verification.min';
         $data['userdata'] = $model->select([
             'email', 'verify', 'verify_at'
         ])->where([
@@ -194,7 +194,6 @@ class Setting extends BaseController
             ->setReceiver($userdata['email'], $userdata['nama'])
             ->setSubject('Email Verification OTP Code');
         $status['sendmail'] = $email->sendOTP($otpCode);
-        $status['sendmail'] = true;
 
         if ($status['sendmail']) {
             $status['insert'] = $model->addVerification($otpCode, userdata('id'));
