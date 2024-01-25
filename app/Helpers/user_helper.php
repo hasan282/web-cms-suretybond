@@ -54,7 +54,7 @@ if (!function_exists('remove_userdata')) {
     function remove_userdata($keys = null)
     {
         $session = \Config\Services::session();
-        $remove = array();
+        $remove  = array();
 
         if ($keys === null) {
             $sesdata = $session->get();
@@ -114,10 +114,31 @@ if (!function_exists('role_is')) {
      */
     function role_is(array $roles): bool
     {
-        $result = false;
+        $result  = false;
         $session = \Config\Services::session();
-        $role = intval($session->get('userdata_access'));
+        $role    = intval($session->get('userdata_access'));
         foreach ($roles as $rl) if ($role === intval($rl)) $result = true;
         return $result;
+    }
+}
+
+if (!function_exists('is_locked')) {
+    function is_locked(string $uri): bool
+    {
+        $session = \Config\Services::session();
+        $unlock  = $session->get('userdata_unlocked') ?? array();
+
+        return !in_array($uri, $unlock);
+    }
+}
+
+if (!function_exists('uri_unlock')) {
+    function uri_unlock(string $uri)
+    {
+        $session = \Config\Services::session();
+        $unlock  = $session->get('userdata_unlocked') ?? array();
+
+        $unlock[] = $uri;
+        $session->set('userdata_unlocked', $unlock);
     }
 }

@@ -27,6 +27,8 @@
 }
 
 .dark-mode .card-title a,
+.dark-mode .card-body a,
+.dark-mode .card-footer a,
 .dark-mode footer a {
   color: #45b1f9;
 }

@@ -35,4 +35,6 @@ $routes->get('/setting/change/username', 'Setting::username');
 $routes->get('/setting/change/password', 'Setting::password');
 $routes->get('/setting/verification/email', 'Setting::verify');
 
+$routes->get('/account/verification', 'Security::index');
+
 $routes->get('/logout', 'Login::out');

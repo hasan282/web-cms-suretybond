@@ -7,7 +7,7 @@
         <div class="card-header">
             <h3 class="card-title">
                 <a href="/setting">
-                    <i class="fas fa-arrow-circle-left mr-2"></i>Back to Settings
+                    <i class="fas fa-chevron-left mr-2"></i>Back to Settings
                 </a>
             </h3>
         </div>

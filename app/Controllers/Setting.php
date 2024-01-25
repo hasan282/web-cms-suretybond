@@ -38,6 +38,7 @@ class Setting extends BaseController
     public function email()
     {
         if (!is_login()) return $this->login();
+        if (is_locked(uri_string())) return $this->unlock();
 
         $model = new UserModel;
         $email = $model->select(['email'])->where(['id' => userdata('id')])->data(false);
@@ -111,8 +112,10 @@ class Setting extends BaseController
     {
         if (!is_login()) return $this->login();
 
-        $email  = $this->request->getPost('emailaddr') . '';
+        $email  = $this->request->getPost('emailaddr');
         $verify = $this->request->getPost('verifynext') == 'on';
+
+        $email  = strtolower(space_replace($email, '') . '');
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL))
             return redirect()->to('setting/change/email');
@@ -131,6 +134,7 @@ class Setting extends BaseController
             } else {
                 // failed
             }
+            remove_userdata('unlocked');
             return redirect()->to(
                 $verify ? 'setting/verification/email' : 'setting'
             );

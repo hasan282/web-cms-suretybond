@@ -79,4 +79,10 @@ abstract class BaseController extends Controller
         $this->session->setFlashdata('requesturl', $uri);
         return redirect()->to('');
     }
+
+    protected function unlock()
+    {
+        $this->session->setFlashdata('destination', uri_string());
+        return redirect()->to('account/verification');
+    }
 }
