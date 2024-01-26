@@ -20,7 +20,7 @@ class Setting extends BaseController
             'id' => userdata('id')
         ])->data(false);
 
-        $this->plugin->set('scrollbar');
+        $this->plugin->set('scrollbar|toastr');
         return $this->view('setting/index', $data);
     }
 
@@ -100,7 +100,7 @@ class Setting extends BaseController
                     $data['countdown'] = $limit - $difference;
                 }
             }
-            $this->plugin->set('scrollbar|inputmask');
+            $this->plugin->set('scrollbar|inputmask|toastr');
             return $this->view('setting/verification/email', $data);
         }
     }
@@ -130,9 +130,15 @@ class Setting extends BaseController
             return redirect()->to('setting/change/email');
         } else {
             if ($model->editEmail($email, userdata('id'))) {
-                // success
+                $this->session->setFlashdata('toast', array([
+                    'theme' => 'success',
+                    'text'  => 'Your email has been successfully changed to ' . $email
+                ]));
             } else {
-                // failed
+                $this->session->setFlashdata('toast', array([
+                    'theme' => 'error',
+                    'text'  => 'An error occurred during the database update, the email cannot be changed'
+                ]));
             }
             remove_userdata('unlocked');
             return redirect()->to(
@@ -157,16 +163,28 @@ class Setting extends BaseController
                 );
             });
             if ($update) {
-                // success
+                $this->session->setFlashdata('toast', array([
+                    'theme' => 'success',
+                    'text'  => 'The email you used has been successfully verified'
+                ]));
             } else {
-                // failed
+                $this->session->setFlashdata('toast', array([
+                    'theme' => 'error',
+                    'text'  => 'An error occurred during the database update, the email cannot be verified'
+                ]));
             }
             return redirect()->to('setting');
         } else {
-            // wrong otp
+            $this->session->setFlashdata('toast', array([
+                'theme' => 'error',
+                'text'  => 'The OTP code you entered is incorrect'
+            ]));
             return redirect()->to('setting/verification/email');
         }
     }
+
+    // ---------------------------------------------------------------------
+    // -------- JSON RETURN ------------------------------------------------
 
     public function verifySend()
     {
@@ -192,15 +210,19 @@ class Setting extends BaseController
         );
         $status['userdata'] = true;
 
-        $otpCode  = mt_rand(100000, 999999);
-        $email = new \App\Libraries\Email;
+        $otpCode = mt_rand(100000, 999999);
+        $email   = new \App\Libraries\Email;
         $email
             ->setReceiver($userdata['email'], $userdata['nama'])
             ->setSubject('Email Verification OTP Code');
         $status['sendmail'] = $email->sendOTP($otpCode);
 
         if ($status['sendmail']) {
-            $status['insert'] = $model->addVerification($otpCode, userdata('id'));
+            $status['insert'] = $model->addVerification(
+                $otpCode,
+                userdata('id'),
+                $userdata['email']
+            );
         }
         return $this->response->setJSON(array(
             'status' => $status

@@ -64,6 +64,7 @@ abstract class BaseController extends Controller
     protected function view(string $view, array $data = []): string
     {
         $data['darkmode'] = intval(get_cookie('DRKMOD') ?? '0') === 1;
+        $data['toast']    = $this->session->getFlashdata('toast') ?? [];
         $data['plugins']  = $this->plugin->get();
 
         $viewscript = view($view, $data);

@@ -88,4 +88,10 @@ $(function () {
     placement: "top",
     trigger: "hover",
   });
+
+  $(".toastr-box")
+    .children("span")
+    .each(function () {
+      toastr[$(this).data("toast")]($(this).html());
+    });
 });
