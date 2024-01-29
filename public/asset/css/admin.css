@@ -1,3 +1,5 @@
+/* ----------------------------------------------------------------------- */
+
 .cursor-pointer {
   cursor: pointer;
 }
@@ -27,6 +29,8 @@
 }
 
 .dark-mode .card-title a,
+.dark-mode .card-body a:not(.btn):not(:hover),
+.dark-mode .card-footer a,
 .dark-mode footer a {
   color: #45b1f9;
 }

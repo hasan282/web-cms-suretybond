@@ -83,4 +83,15 @@ $(function () {
         .attr("class", SHOW ? ICON : ICON + "-slash");
       $(this).data("show", SHOW ? "0" : "1");
     });
+
+  $(".show-tooltip").tooltip({
+    placement: "top",
+    trigger: "hover",
+  });
+
+  $(".toastr-box")
+    .children("span")
+    .each(function () {
+      toastr[$(this).data("toast")]($(this).html());
+    });
 });

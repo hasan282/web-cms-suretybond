@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use CodeIgniter\Exceptions\PageNotFoundException;
 
 class Principal extends BaseController
 {
@@ -20,9 +21,14 @@ class Principal extends BaseController
     {
         if (!is_login()) return $this->login();
 
-        $data['title'] = 'Add New Principal';
+        if (role_is([101, 201, 202, 301])) {
 
-        $this->plugin->set('scrollbar');
-        return $this->view('layout/blank', $data);
+            $data['title'] = 'Add New Principal';
+
+            $this->plugin->set('scrollbar');
+            return $this->view('layout/blank', $data);
+        } else {
+            throw PageNotFoundException::forPageNotFound();
+        }
     }
 }

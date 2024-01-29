@@ -36,7 +36,7 @@ abstract class BaseController extends Controller
      *
      * @var array
      */
-    protected $helpers = ['cookie', 'hash', 'user'];
+    protected $helpers = ['cookie', 'hash', 'format', 'user'];
 
     /**
      * Be sure to declare properties for any property fetch you initialized.
@@ -64,6 +64,7 @@ abstract class BaseController extends Controller
     protected function view(string $view, array $data = []): string
     {
         $data['darkmode'] = intval(get_cookie('DRKMOD') ?? '0') === 1;
+        $data['toast']    = $this->session->getFlashdata('toast') ?? [];
         $data['plugins']  = $this->plugin->get();
 
         $viewscript = view($view, $data);
@@ -78,5 +79,11 @@ abstract class BaseController extends Controller
             $uri = $uri . '?' . http_build_query($gets);
         $this->session->setFlashdata('requesturl', $uri);
         return redirect()->to('');
+    }
+
+    protected function unlock()
+    {
+        $this->session->setFlashdata('destination', uri_string());
+        return redirect()->to('account/verification');
     }
 }

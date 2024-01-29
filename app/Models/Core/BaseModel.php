@@ -196,6 +196,14 @@ class BaseModel
         return intval($build->countAllResults());
     }
 
+    public function transaction(?callable $callback)
+    {
+        $this->connect->transBegin();
+        $callback($this->connect);
+        $this->connect->transComplete();
+        return $this->connect->transStatus();
+    }
+
     /**
      * Set Fields
      * @param string $table table name

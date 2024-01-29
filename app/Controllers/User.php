@@ -21,14 +21,14 @@ class User extends BaseController
     {
         if (!is_login()) return $this->login();
 
-        if (!role_is([101, 201])) {
-            throw PageNotFoundException::forPageNotFound();
-        } else {
+        if (role_is([101, 201])) {
 
             $data['title'] = 'Manage User Account';
 
             $this->plugin->set('scrollbar');
             return $this->view('layout/blank', $data);
+        } else {
+            throw PageNotFoundException::forPageNotFound();
         }
     }
 }

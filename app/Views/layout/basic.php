@@ -38,6 +38,12 @@ $application_title = 'Jasmin-e';
 
 <?= $this->renderSection('body'); ?>
 
+<div class="hide-content toastr-box">
+    <?php foreach ($toast as $ts) : ?>
+        <span data-toast="<?= $ts['theme']; ?>"><?= $ts['text']; ?></span>
+    <?php endforeach; ?>
+</div>
+
 <script>
     const BaseURL = "<?= base_url(); ?>";
 </script>

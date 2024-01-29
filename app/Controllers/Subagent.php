@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use CodeIgniter\Exceptions\PageNotFoundException;
 
 class Subagent extends BaseController
 {
@@ -20,9 +21,14 @@ class Subagent extends BaseController
     {
         if (!is_login()) return $this->login();
 
-        $data['title'] = 'Add New Subagent';
+        if (role_is([101, 201])) {
 
-        $this->plugin->set('scrollbar');
-        return $this->view('layout/blank', $data);
+            $data['title'] = 'Add New Subagent';
+
+            $this->plugin->set('scrollbar');
+            return $this->view('layout/blank', $data);
+        } else {
+            throw PageNotFoundException::forPageNotFound();
+        }
     }
 }

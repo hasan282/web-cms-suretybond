@@ -19,6 +19,12 @@ class EmailVerify extends Migration
                 'null'       => true,
                 'default'    => null
             ],
+            'email'         => [
+                'type'       => 'VARCHAR',
+                'constraint' => 64,
+                'null'       => true,
+                'default'    => null
+            ],
             'otp'         => [
                 'type'       => 'VARCHAR',
                 'constraint' => 6,

@@ -2,77 +2,38 @@
 
 <?= $this->section('content'); ?>
 
-<?php
-
-$pattern     = '9 9 9 9 9 9';
-$placeholder = '_ _ _ _ _ _';
-
-?>
-
-<style>
-    .open-email-picture {
-        background-image: url('<?= base_url('image/content/openmail.gif'); ?>');
-        background-color: #fff;
-        background-size: 270px;
-        background-repeat: no-repeat;
-        background-position: center top;
-        border-radius: 12px;
-    }
-
-    .dark-mode .open-email-picture {
-        filter: invert(0.8);
-    }
-</style>
-
 <div class="mw-6 mx-auto">
-
     <div class="card">
         <div class="card-body">
 
-            <div class="text-sm-center mb-2">
-
-                <div class="open-email-picture">
-                    <div style="height:170px"></div>
-                    <div class="py-1">
-                        <p class="text-secondary text-sm mb-0">We have sent an email containing the OTP code to the address <strong><?= $userdata['email']; ?></strong>.</p>
-                        <p class="text-secondary text-sm">Please check your email and enter the OTP code below.</p>
+            <?php if ($countdown < 60) : ?>
+                <div id="sendbox" data-name="<?= csrf_token(); ?>" data-csrf="<?= csrf_hash(); ?>">
+                    <div class="mw-5 mx-auto py-3">
+                        <p class="mt-4 text-secondary">
+                            <i class="fas fa-spinner fa-spin fa-3x"></i>
+                        </p>
+                        <p class="text-dark text-sm">Please wait, we will send an OTP code to the email address <strong><?= $userdata['email']; ?></strong>.</p>
                     </div>
                 </div>
+                <div class="hide-content" id="verifybox">
 
-
-            </div>
-
-            <form method="post">
-
-                <div class="mw-2 mx-auto">
-                    <input type="text" name="verifyotp" class="form-control form-control-lg text-center inputmask text-bold" data-inputmask='"mask":"<?= $pattern; ?>"' placeholder="<?= $placeholder; ?>">
-
-                    <button type="submit" id="submitotp" class="btn btn-primary text-bold btn-block mt-4" disabled>
-                        <i class="fas fa-check mr-2"></i>Verify Your Email
-                    </button>
+                    <?= $this->include('setting/verification/form'); ?>
                 </div>
+                <div class="hide-content" id="sendfailed">
 
-            </form>
+                    <?= $this->include('setting/verification/failed_send'); ?>
+                </div>
+                <div class="hide-content" id="connectfailed">
+
+                    <?= $this->include('setting/verification/failed_connect'); ?>
+                </div>
+            <?php else : ?>
+
+                <?= $this->include('setting/verification/form'); ?>
+            <?php endif; ?>
 
         </div>
     </div>
-
 </div>
-
-<?= $this->endSection(); ?>
-
-<?= $this->section('script'); ?>
-
-<script>
-    $(function() {
-
-        $('.inputmask').inputmask().on('input', function() {
-            const VALUE = $(this).val();
-            const parse = val => parseInt(val.replace(/[_\s+]/g, ''));
-            $('#submitotp').prop('disabled', VALUE == '' || parse(VALUE) < 100000);
-        });
-
-    });
-</script>
 
 <?= $this->endSection(); ?>
