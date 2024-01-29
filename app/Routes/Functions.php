@@ -11,5 +11,6 @@ $routes->post('/setting/verification/email', 'Setting::verifyProcess');
 $routes->post('/setting/verification/send/email', 'Setting::verifySend', ['filter' => 'csrf']);
 
 $routes->post('/setting/change/email', 'Setting::emailChange');
+$routes->post('/setting/change/password', 'Setting::passChange');
 
 $routes->post('/account/verification', 'Security::auth');

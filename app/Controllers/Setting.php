@@ -67,8 +67,9 @@ class Setting extends BaseController
     {
         if (!is_login()) return $this->login();
 
-        $data['title'] = 'Change User Password';
-        $data['bread'] = ['Settings|setting', 'Change Password'];
+        $data['title']   = 'Change User Password';
+        $data['bread']   = ['Settings|setting', 'Change Password'];
+        $data['jscript'] = 'change.password';
 
         $this->plugin->set('scrollbar');
         return $this->view('setting/change/password', $data);
@@ -145,6 +146,11 @@ class Setting extends BaseController
                 $verify ? 'setting/verification/email' : 'setting'
             );
         }
+    }
+
+    public function passChange()
+    {
+        var_dump($_POST);
     }
 
     public function verifyProcess()

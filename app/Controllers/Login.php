@@ -32,7 +32,7 @@ class Login extends BaseController
     {
         $userOrEmail = $this->request->getPost('inputuser');
         $password    = $this->request->getPost('inputpass');
-        $requestUri  = $this->request->getPost('urrequest');
+        $requestUri  = $this->request->getPost('urrequest') . '';
 
         $model = new UserModel;
         $login = $model->login($userOrEmail, $password);
@@ -51,6 +51,7 @@ class Login extends BaseController
             set_userdata($userdata);
             set_cookie('USRLOG', $login['data']['hash'], 60 * 60 * 24 * 5);
             $redirect->withCookies();
+            if ($requestUri != '') uri_unlock($requestUri);
         } else {
             if (empty($login['data'])) {
                 $this->session->setFlashdata('message', 'Account is Not Registered');
