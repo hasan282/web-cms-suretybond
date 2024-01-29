@@ -51,7 +51,9 @@
                     </div>
 
                     <div class="pt-2">
-                        <button type="submit" class="btn btn-primary text-bold" disabled>Change Password</button>
+                        <button type="submit" class="btn btn-primary text-bold" disabled>
+                            <i class="fas fa-lock mr-2"></i>Change Password
+                        </button>
                     </div>
                 </form>
 

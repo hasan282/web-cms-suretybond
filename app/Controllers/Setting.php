@@ -66,10 +66,11 @@ class Setting extends BaseController
     public function password()
     {
         if (!is_login()) return $this->login();
+        if (is_locked(uri_string())) return $this->unlock();
 
         $data['title']   = 'Change User Password';
         $data['bread']   = ['Settings|setting', 'Change Password'];
-        $data['jscript'] = 'change.password';
+        $data['jscript'] = 'change.password.min';
 
         $this->plugin->set('scrollbar');
         return $this->view('setting/change/password', $data);
@@ -150,7 +151,33 @@ class Setting extends BaseController
 
     public function passChange()
     {
-        var_dump($_POST);
+        if (!is_login()) return $this->login();
+
+        $newPassword = sha3hash($this->request->getPost('newpass') . '', 50);
+        $confirmPass = sha3hash($this->request->getPost('confirmpass') . '', 50);
+
+        if ($newPassword !== $confirmPass) return redirect()->to('setting/change/password');
+
+        $model = new UserModel;
+        $update = $model->transaction(function ($db) use ($newPassword) {
+            $db->table('d_user')->update(
+                ['password' => $newPassword],
+                ['id' => userdata('id')]
+            );
+        });
+        if ($update) {
+            $this->session->setFlashdata('toast', array([
+                'theme' => 'success',
+                'text'  => 'Your login password has been successfully changed'
+            ]));
+            remove_userdata('unlocked');
+        } else {
+            $this->session->setFlashdata('toast', array([
+                'theme' => 'error',
+                'text'  => 'An error occurred during the database update, your password cannot be changed'
+            ]));
+        }
+        return redirect()->to('setting');
     }
 
     public function verifyProcess()
