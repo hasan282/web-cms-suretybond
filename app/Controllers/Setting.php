@@ -32,7 +32,8 @@ class Setting extends BaseController
         $data['bread'] = ['Settings|setting', 'Change Full Name'];
 
         $this->plugin->set('scrollbar');
-        return $this->view('setting/change/name', $data);
+        // return $this->view('setting/change/name', $data);
+        return $this->view('layout/blank', $data);
     }
 
     public function email()
@@ -60,7 +61,8 @@ class Setting extends BaseController
         $data['bread'] = ['Settings|setting', 'Change Username'];
 
         $this->plugin->set('scrollbar');
-        return $this->view('setting/change/username', $data);
+        // return $this->view('setting/change/username', $data);
+        return $this->view('layout/blank', $data);
     }
 
     public function password()
