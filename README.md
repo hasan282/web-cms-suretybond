@@ -4,9 +4,9 @@
 
 1. Download File [PLUGIN](https://drive.google.com/file/d/1Gjv1kKclZ92QPfx10YvEihxCMh-IH6Wi/view) dan [VENDOR](https://drive.google.com/file/d/1S0gXXwrhpintvg8CmC7Tv4NJ5B7DqQLq/view) pada Google Drive.
 
-2. Ekstrak file `plugins_and_fonts.rar` pada folder utama.
+2. Ekstrak file `vendor_ci.rar` pada folder utama.
 
-3. Ekstrak `vendor_ci.rar` pada folder `public/`.
+3. Ekstrak `plugins_and_fonts.rar` pada folder `public/`.
 
 4. Rename file `env` menjadi `.env`.
 
